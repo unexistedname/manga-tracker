@@ -1,6 +1,6 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+import { Client, GatewayIntentBits, EmbedBuilder } from 'discord.js';
+import { resolve } from 'path';
+require('dotenv').config({ path: resolve(__dirname, '../../.env') });
 
 const client = new Client({
   intents: [
@@ -25,4 +25,4 @@ async function announcer(title, link, newChapter, image) {
 };
 client.login(process.env.token);
 
-module.exports = {announcer};
+export default announcer;

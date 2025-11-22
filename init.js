@@ -1,12 +1,12 @@
-const fs = require("fs");
-const scraper = require("./tracker-server/tracker/scraper");
-const baseLink = JSON.parse(fs.readFileSync("./data/baseLink.json", "utf-8"));
+import { readFileSync, existsSync, writeFileSync } from "fs";
+import scraper from "./tracker-server/tracker/scraper";
+const baseLink = JSON.parse(readFileSync("./data/baseLink.json", "utf-8"));
 const path = "./data/data.json";
 
-if (!fs.existsSync(path)) {
+if (!existsSync(path)) {
   //bikin klo gaada
   const x = [];
-  fs.writeFileSync(path, JSON.stringify(x, null, 2), "utf8");
+  writeFileSync(path, JSON.stringify(x, null, 2), "utf8");
   console.log("No data file detected, creating a new one...");
 }
 
@@ -32,7 +32,7 @@ data = [];
       data.push(mangaData);
       console.log(`${a} loaded`);
     }
-    fs.writeFileSync(path, JSON.stringify(data, null, 2), "utf-8");
+    writeFileSync(path, JSON.stringify(data, null, 2), "utf-8");
   } catch (error) {
     console.log(error);
   } finally {

@@ -1,7 +1,7 @@
-const { chromium } = require('playwright');
-const axios = require('axios');
-const path = require('path');
-const fs = require('fs');
+import { chromium } from 'playwright';
+import axios from 'axios';
+import { join } from 'path';
+import { existsSync, mkdirSync, createWriteStream } from 'fs';
 
 let browser, page;
 async function initBrowser() {
@@ -49,7 +49,8 @@ async function chapterScraper(url) {
 
         const list = await page.$$eval('#chapter-list > div', x =>
             x.map(y => y.getAttribute('data-chapter-number')) //ngambil chapternya pke atribut
-                .filter(Boolean));
+                .filter(Boolean)
+                .map(Number));
         console.log(`Scraped ${list.length} chapters`);
         return list;
     } catch (error) {
@@ -84,9 +85,9 @@ async function coverScraper(url, title) { //Cmn ngambil url gambarnya doang, nge
         const imgUrl = await img.getAttribute('src');
         console.log(`Image URL scraped`)
 
-        const dirPath = path.join(__dirname, '..', '..', 'data', 'media');
+        const dirPath = join(__dirname, '..', '..', 'data', 'media');
         const fileName = `${title.replaceAll(' ', '').toLowerCase()}.png`;
-        const filePath = path.join(dirPath, fileName);
+        const filePath = join(dirPath, fileName);
         await saveCover(imgUrl, dirPath, filePath);
         return filePath;
     } catch (error) {
@@ -99,19 +100,19 @@ async function saveCover(url, dir, full) { //Jgn diapus fullnya wkwkwkw
         url: url,
         responseType: 'stream'
     });
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+    if (!existsSync(dir)) {
+        mkdirSync(dir, { recursive: true });
         console.log(`No directory, created one`);
     };
-    if (!fs.existsSync(full)) {
-        const write = fs.createWriteStream(full);
+    if (!existsSync(full)) {
+        const write = createWriteStream(full);
         await res.data.pipe(write);
         write.on('finish', () => {
             console.log("Image saved in", dir);
         });
     };
 }
-module.exports = {
+export {
     initBrowser,
     closeBrowser,
     chapterScraper,

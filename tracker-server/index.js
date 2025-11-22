@@ -1,9 +1,11 @@
-const path = require('path');
-const fs = require('fs');
-const tracker = require('./tracker/tracker');
-const { env } = require('process');
-const mangaData = JSON.parse(fs.readFileSync('./data/data.json', 'utf8'));
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+import { resolve, basename } from 'path';
+import { readFileSync } from 'fs';
+import tracker from './tracker/tracker.js';
+import updater from './tracker/updater.js';
+import "dotenv/config";
+const dataPath = resolve('./data/data.json');
+const updateLogPath = resolve('./data/updateLog.json');
+const mangaData = JSON.parse(readFileSync(dataPath, 'utf8'));
 
 // Nampilin file asal log
 const trackerLog = console.log;
@@ -11,12 +13,11 @@ console.log = (...args) => {
     const stackLine = new Error().stack.split("\n")[2].trim();
     const match = stackLine.match(/\((.*):\d+:\d+\)$/);
     const filePath = match ? match[1] : stackLine;
-    trackerLog(`[${path.basename(filePath)}]`, ...args);
+    trackerLog(`[${basename(filePath)}]`, ...args);
 };
 
 /* 
 - memulai tracking tiap x menit \\ done
-- kyk dcbot python
 - if tracker != 0, announce bot + write file
 */
 
@@ -24,8 +25,9 @@ console.log = (...args) => {
 setInterval(
     async () => {
         for (let manga of mangaData) {
-            const title = Object.keys(manga);
-            const x = await tracker(title);
-            console.log(x);
+            const title = [...Object.keys(manga)];
+            const results = await tracker(...title, dataPath, updateLogPath);
         };
-    }, parseInt(env.TRACKER_INTERVAL) * 60000);
+        await updater(dataPath, updateLogPath);
+        
+    }, parseInt(process.env.interval) * 60000);
