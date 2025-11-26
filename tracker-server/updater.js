@@ -9,7 +9,7 @@ async function updater(dir, logDir) {
         for (const update of Object.keys(log)) {
             const entry = await data.find(item => Object.prototype.hasOwnProperty.call(item, update)); //chatgpt ass shit idk
             const manga = entry[update];
-            manga["Chapter List"].push(...log[update]);
+            manga["Chapter List"].push(...log[update]["Latest"]);
             // Sorting chapter biar berurutan
             manga["Chapter List"].sort((a, b) => a - b);
         }

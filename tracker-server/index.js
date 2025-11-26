@@ -21,6 +21,22 @@ console.log = (...args) => {
 - memulai tracking tiap x menit \\ done
 - if tracker != 0, announce bot + write file //donbe
 */
+setInterval(
+    async () => {
+        console.log("\x1b[34mScraping started... \x1b[0m");
+        
+        for (let manga of mangaData) {
+            const title = [...Object.keys(manga)];
+            const results = await tracker(...title, dataPath, updateLogPath);
+            
+            if (results.length != 0 && Array.isArray(results)) {
+                await announcer(title, manga[title]["Link"], results, manga[title]["Image Directory"]);
+            }
+        };
+        await updater(dataPath, updateLogPath);
+        console.log("\x1b[34mScraping ended! Next scrape in", process.env.interval, "\x1b[34mMinutes\x1b[0m");  
+    }, parseInt(process.env.interval) * 60000);
+
 
 /* For debugging 
 (async () => {
@@ -31,7 +47,7 @@ console.log = (...args) => {
         const results = await tracker(...title, dataPath, updateLogPath);
         console.log(results.length);
         
-        if (results.length != 0) {
+        if (results.length != 0 && Array.isArray(results)) {
             await announcer(title, manga[title]["Link"], results, manga[title]["Image Directory"]);
         }
     };
@@ -41,19 +57,5 @@ console.log = (...args) => {
 */
 
 // Tracking manga tiap 30 mnt (edit intervalny di .env)
-setInterval(
-    async () => {
-        console.log("\x1b[34mScraping started... \x1b[0m");
-        
-        for (let manga of mangaData) {
-            const title = [...Object.keys(manga)];
-            const results = await tracker(...title, dataPath, updateLogPath);
-            console.log(results.length);
-            
-            if (results.length != 0) {
-                await announcer(title, manga[title]["Link"], results, manga[title]["Image Directory"]);
-            }
-        };
-        await updater(dataPath, updateLogPath);
-        console.log("\x1b[34mScraping ended! Next scrape in", process.env.interval, "\x1b[34mMinutes\x1b[0m");  
-    }, parseInt(process.env.interval) * 2000 * 3);
+console.log("It'll start in 30 min :)");
+

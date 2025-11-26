@@ -16,7 +16,7 @@ async function announcer(title, link, newChapter, image) {
   const embed = new EmbedBuilder()
     .setColor(0x00aaff)
     .setTitle(`Update Manga: ${title}`)
-    .setDescription(`Chapter ${newChapter.join(", ")}`)
+    .setDescription(`Chapter ${Array.isArray(newChapter) ? newChapter.join(", ") : newChapter}`)
     .setImage(`attachment://${basename(image)}`)
     .setURL(link)
     .setTimestamp();

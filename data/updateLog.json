@@ -1,79 +1,157 @@
 {
-  "Drawing": [
-    170,
-    169,
-    168
-  ],
-  "Bijo to Kenja": [
-    40
-  ],
-  "Fuguushoku to Baka": [
-    49,
-    48,
-    47,
-    46,
-    45
-  ],
-  "Hinekure Ryoushu": [],
-  "Kamigami": [
-    59,
-    58
-  ],
-  "Sacchi Sarenai": [
-    49
-  ],
-  "Sekai Saikyou no Shinjuu Tsukai": [],
-  "Shingan no Yuusha": [],
-  "Uragirareta S-rank": [
-    126,
-    125.5
-  ],
-  "Maryoku Zero": [],
-  "Naze Boku no Sekai": [],
-  "Monster no Goshuujin": [
-    88.3,
-    88.2
-  ],
-  "Chittai": [
-    25.1,
-    24.3
-  ],
-  "Isekai Cheat": [
-    35.2
-  ],
-  "Isekai de Tochi": [],
-  "Umareta Chokugo": [
-    67.2,
-    67.1,
-    66.2
-  ],
-  "Maou-sama Retry R": [
-    53.3
-  ],
-  "Tenohira": [
-    62.2
-  ],
-  "Monster Onna Kanbu": [],
-  "Tensei Kizoku": [
-    56.1
-  ],
-  "Dragon ni Sando": [],
-  "Ore, Yuusha Janai": [
-    46.5,
-    46.2
-  ],
-  "Keizoku": [],
-  "Next Life": [],
-  "Maou Toubatsu": [],
-  "Yuusha-kei": [],
-  "Kyou Senshi na Mob Mujikaku ni Honpen wo Hakaisuru": [
-    23.3,
-    23.2
-  ],
-  "Sakigake no Hana Miko": [
-    60
-  ],
-  "Hisshou Dungeon": [
-    76.1
-  ]
+  "Drawing": {
+    "Latest": [],
+    "Time": "2025/11/26 21:04:54",
+    "Status": "Active"
+  },
+  "Bijo to Kenja": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:04",
+    "Status": "Active"
+  },
+  "Fuguushoku to Baka": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:14",
+    "Status": "Active"
+  },
+  "Hinekure Ryoushu": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:24",
+    "Status": "Active"
+  },
+  "Kamigami": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:34",
+    "Status": "Active"
+  },
+  "Sacchi Sarenai": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:44",
+    "Status": "Active"
+  },
+  "Sekai Saikyou no Shinjuu Tsukai": {
+    "Latest": [],
+    "Time": "2025/11/26 21:05:54",
+    "Status": "Active"
+  },
+  "Shingan no Yuusha": {
+    "Latest": [],
+    "Time": "2025/11/26 21:06:03",
+    "Status": "Active"
+  },
+  "Uragirareta S-rank": {
+    "Latest": [],
+    "Time": "2025/11/26 21:06:13",
+    "Status": "Active"
+  },
+  "Maryoku Zero": {
+    "Latest": [],
+    "Time": "2025/11/26 21:06:23",
+    "Status": "Active"
+  },
+  "Naze Boku no Sekai": {
+    "Latest": [],
+    "Time": "2025/11/26 21:06:32",
+    "Status": "Active"
+  },
+  "Monster no Goshuujin": {
+    "Latest": [
+      88.3,
+      88.2,
+      88.1,
+      87.2
+    ],
+    "Time": "2025/11/26 21:06:41",
+    "Status": "Active"
+  },
+  "Chittai": {
+    "Latest": [],
+    "Time": "2025/11/26 21:06:53",
+    "Status": "Active"
+  },
+  "Isekai Cheat": {
+    "Latest": [
+      35.2
+    ],
+    "Time": "2025/11/26 21:07:03",
+    "Status": "Active"
+  },
+  "Isekai de Tochi": {
+    "Latest": [
+      65,
+      64
+    ],
+    "Time": "2025/11/26 21:07:14",
+    "Status": "Active"
+  },
+  "Umareta Chokugo": {
+    "Latest": [],
+    "Time": "2025/11/26 21:07:24",
+    "Status": "Active"
+  },
+  "Maou-sama Retry R": {
+    "Latest": [],
+    "Time": "2025/11/26 21:07:44",
+    "Status": "Active"
+  },
+  "Tenohira": {
+    "Latest": [],
+    "Time": "2025/11/26 21:07:54",
+    "Status": "Active"
+  },
+  "Monster Onna Kanbu": {
+    "Latest": [],
+    "Time": "2025/11/26 21:08:04",
+    "Status": "Active"
+  },
+  "Tensei Kizoku": {
+    "Latest": [],
+    "Time": "2025/11/26 21:08:14",
+    "Status": "Active"
+  },
+  "Dragon ni Sando": {
+    "Latest": [],
+    "Time": "2025/11/26 21:08:23",
+    "Status": "Active"
+  },
+  "Ore, Yuusha Janai": {
+    "Latest": [],
+    "Time": "2025/11/26 21:08:50",
+    "Status": "Active"
+  },
+  "Keizoku": {
+    "Latest": [],
+    "Time": "2025/11/26 21:09:00",
+    "Status": "Active"
+  },
+  "Next Life": {
+    "Latest": [],
+    "Time": "2025/11/26 21:09:10",
+    "Status": "Active"
+  },
+  "Maou Toubatsu": {
+    "Latest": [],
+    "Time": "2025/11/26 21:09:20",
+    "Status": "Active"
+  },
+  "Yuusha-kei": {
+    "Latest": [],
+    "Time": "2025/11/26 21:09:30",
+    "Status": "Active"
+  },
+  "Kyou Senshi na Mob Mujikaku ni Honpen wo Hakaisuru": {
+    "Latest": [],
+    "Time": "2025/11/26 21:10:00",
+    "Status": "Error"
+  },
+  "Sakigake no Hana Miko": {
+    "Latest": [],
+    "Time": "2025/11/26 21:10:14",
+    "Status": "Active"
+  },
+  "Hisshou Dungeon": {
+    "Latest": [],
+    "Time": "2025/11/26 21:10:24",
+    "Status": "Active"
+  }
 }

@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "trackerTest": "node .\\tracker-server\\tracker\\test.js",
+    "tracker-test": "node .\\tracker-server\\tracker\\test.js",
     "dataInit": "node .\\init.js",
-    "trackerStart": "node .\\tracker-server\\index.js",
+    "tracker": "node .\\tracker-server\\index.js",
     "start": "concurrently \"node program1.js\" \"node program2.js\""
   },
   "keywords": [],
@@ -15,6 +15,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.12.2",
+    "date-and-time": "^4.1.1",
     "discord.js": "^14.23.2",
     "dotenv": "^17.2.3",
     "playwright": "^1.56.1"

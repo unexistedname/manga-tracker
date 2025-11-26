@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { chapterScraper, initBrowser, closeBrowser } from './scraper.js';
-
+import { format } from 'date-and-time';
+// Bandingin chapter
 async function tracker(title, dir, saveDir) {
     const data = JSON.parse(readFileSync(dir, 'utf-8'));
     await initBrowser()
@@ -19,9 +20,9 @@ async function tracker(title, dir, saveDir) {
         const oldList = manga["Chapter List"];
         console.log(`Found ${oldList.length} chapter(s) in ${title} from data.`);
 
-        const newList = await chapterScraper(manga["Link"]) || [];
-        const update = Array.isArray(newList) ? newList.filter(x => !oldList.includes(x)) : []; //Filter bedanya newList sama oldList. Klo ada, taro di update
-        console.log(`Found ${update.length} new chapter(s).`)
+        const newList = await chapterScraper(manga["Link"]);
+        const update = Array.isArray(newList) ? newList.filter(x => !oldList.includes(x)) : 0; //Filter bedanya newList sama oldList. Klo ada, taro di update
+        console.log(`Found ${update === 0 ? "\x1b[31m(Error)\x1b[0m" : update.length} new chapter(s).`)
 
         await closeBrowser();
         await updateLog(saveDir, title, update);
@@ -32,7 +33,7 @@ async function tracker(title, dir, saveDir) {
         return 0;
     }
 }
-
+// Bikin log cache
 async function updateLog(dir, title, update) {
     try {
         if (!existsSync(dir)) {
@@ -42,7 +43,11 @@ async function updateLog(dir, title, update) {
             console.log("\x1b[33mNo log file detected, creating a new one...\x1b[0m");
         }
         let log = JSON.parse(readFileSync(dir, 'utf-8'));
-        log[title] = update;
+            log[title] = {
+                "Latest": Array.isArray(update) ? update : (log[title]?.Latest || []),
+                "Time": format(new Date(), 'YYYY/MM/DD HH:mm:ss'),
+                "Status": update === 0 ? "Error" : "Active"
+            }
         writeFileSync(dir, JSON.stringify(log, null, 2))
         console.log(`\x1b[32mSuccessfully save ${title}'s update log\x1b[0m`)
     } catch (error) {

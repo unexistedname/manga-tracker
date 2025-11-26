@@ -40,12 +40,12 @@ async function closeBrowser() {
 }
 async function chapterScraper(url) {
     try {
-        await page.goto(url);
         console.log("Going to url...");
+        await page.goto(url);
 
         await page.waitForSelector('button[data-key="chapters"]')
         await page.click('button[data-key="chapters"]')
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(6000);
 
         const list = await page.$$eval('#chapter-list > div', x =>
             x.map(y => y.getAttribute('data-chapter-number')) //ngambil chapternya pke atribut
@@ -55,8 +55,11 @@ async function chapterScraper(url) {
         return list;
     } catch (error) {
         console.error("\x1b[31mError while scraping chapter: \x1b[0m", error, "\n");
+        return null;
     }
 }
+
+// Only used on init
 async function titleScraper(url) {
     try {
         await page.goto(url);
