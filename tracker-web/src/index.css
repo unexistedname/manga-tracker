@@ -7,4 +7,6 @@
 @theme {
   --font-title: "Cal Sans", sans-serif;
   --font-monospace: "Fira Code", monospace;
+  --color-kinda-black: #010101;
+  --color-kinda-white: #FEFEFE;
 }
