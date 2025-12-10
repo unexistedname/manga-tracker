@@ -4,13 +4,14 @@ import Nav from './assets/Navbar';
 import Bg from './assets/Bg';
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
+      <div className='relative'>
       <Bg/>
-      <h1 className='font-title'>Halo udnia</h1>
       <Nav/>
       <Routes>
         <Route path="/" element={<Home/>} />
       </Routes>
+      </div>
     </BrowserRouter>
   )
 }

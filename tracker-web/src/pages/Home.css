@@ -1,0 +1,6 @@
+.bg-semi-border {
+    border-top: 1px solid red;
+    border-left: 1px solid red;
+    border-bottom: 1px solid blue;
+    border-right: 1px solid blue;
+}
