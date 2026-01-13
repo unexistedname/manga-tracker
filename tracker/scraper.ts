@@ -8,7 +8,7 @@ export type metadata = {
   author?: string;
   artist?: string;
   genre?: string[];
-  descriptions: string[];
+  descriptions: string[] | string;
   coverURL: string | null;
   src: string;
 };
@@ -34,9 +34,9 @@ export async function chapter(html: string): Promise<number[]> {
     throw error;
   }
 }
-
-export async function metadataExt(id: number): Promise<metadata> {
-  // Scrapes from MAL, requies manga ID.
+// ---------- METADATA SCRAPER------------
+export async function metadataMAL(id: number): Promise<metadata> {
+  // Scrapes from MAL, requires manga ID.
   try {
     const res = await axios.get(`https://myanimelist.net/manga/${id}`);
     const $ = cheerio.load(res.data);
@@ -73,7 +73,7 @@ export async function metadataExt(id: number): Promise<metadata> {
   }
 }
 
-export function metadata(html: string): metadata {
+export function metadataRK(html: string): metadata {
   // Scrapes from rawkuma, doesn't get author & artist name
   try {
     const $ = cheerio.load(html);
@@ -82,9 +82,7 @@ export function metadata(html: string): metadata {
     const genre = $("a[itemprop='genre']")
       .map((_, el) => $(el).text().trim().toLowerCase())
       .get();
-    const descriptions = $("div[itemprop='description'][data-show='false'] p")
-      .map((_, par) => $(par).text().trim().toString())
-      .get();
+    const descriptions = $("div[itemprop='description'][data-show='false']").text().trim();
     const cover = $("div[itemprop='image'] img").attr("src");
 
     return {

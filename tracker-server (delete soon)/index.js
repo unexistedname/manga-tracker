@@ -1,6 +1,6 @@
 import { resolve, basename } from 'path';
 import { readFileSync } from 'fs';
-import tracker from './tracker/tracker.js';
+import tracker from '../tracker/tracker.js';
 import updater from './updater.js';
 import announcer from '../discord-bot/announcer.js';
 import "dotenv/config";
