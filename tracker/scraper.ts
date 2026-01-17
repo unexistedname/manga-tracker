@@ -22,13 +22,17 @@ export async function chapter(html: string): Promise<number[]> {
       console.log("Chapter URL unexpected data type: ", typeof list_url);
       return [];
     }
+    console.log("[ SCRAPER.CHAPTER ] Chapter list API get.");
 
     const chapter_url_res = await axios.get(list_url);
+    
+    console.log("[ SCRAPER.CHAPTER ] Successfully executed GET request into chapter API.");
     const $$ = cheerio.load(chapter_url_res.data);
     const list = $$("div#chapter-list div")
       .map((_, ch) => $$(ch).attr("data-chapter-number"))
       .get()
       .reverse();
+    console.log("[ SCRAPER.CHAPTER ] Chapter list obtained.");
     return list;
   } catch (error: unknown) {
     throw error;
@@ -80,11 +84,15 @@ export function metadataRK(html: string): metadata {
     const $ = cheerio.load(html);
 
     const title = $("h1[itemprop='name']").text().trim();
+    console.log("[ SCRAPER.METADATA ] Title obtained.");
     const genre = $("a[itemprop='genre']")
       .map((_, el) => $(el).text().trim().toLowerCase())
       .get();
+    console.log("[ SCRAPER.METADATA ] Genre obtained.");
     const descriptions = $("div[itemprop='description'][data-show='false']").text().trim();
+    console.log("[ SCRAPER.METADATA ] Description obtained.");
     const cover = $("div[itemprop='image'] img").attr("src");
+    console.log("[ SCRAPER.METADATA ] Image link obtained.");
 
     return {
       title: title,
