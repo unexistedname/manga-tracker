@@ -64,7 +64,7 @@ for (let key in baseData) {
 //       const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
 //       dataStored[id] = dataScrape;
 //       chapterStored[id] = {
-//         chapter: oldChapter.push(...newChapter),
+//         chapter: [...oldChapter, ...newChapter],
 //         newChapter: newChapter,
 //         lastUpdate: new Date().toISOString(),
 //       };
@@ -73,8 +73,31 @@ for (let key in baseData) {
 // }, 30 * interval);
 
 // For debugging
+// (async () => {
+//   for (let key in baseData) {
+//     if (baseData.hasOwnProperty(key)) {
+//       const id = key.toLowerCase().replace(/\s+/g, "");
+//       const res = await axios.get(baseData[key]);
+//       const dataScrape = Scraper.metadataRK(res.data);
+//       const chapterScrape = await Scraper.chapter(res.data);
+
+//       const oldChapter: number[] = chapterStored[id]?.chapter ?? [];
+//       const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
+
+//       dataStored[id] = dataScrape;
+//       chapterStored[id] = {
+//         chapter: [...oldChapter, ...newChapter],
+//         newChapter: newChapter,
+//         lastUpdate: new Date().toISOString(),
+//       };
+//     }
+//   }
+//   writeFileSync(chapterPath, JSON.stringify(chapterStored, null, 2), "utf-8");
+//   writeFileSync(dataPath, JSON.stringify(dataStored, null, 2), "utf-8");
+//   console.log("Done");
+// })();
 (async () => {
-  let key = "Drawing";
+  const key = "Drawing";
   const id = key.toLowerCase().replace(/\s+/g, "");
   const res = await axios.get(baseData[key]);
   const dataScrape = Scraper.metadataRK(res.data);
@@ -83,12 +106,13 @@ for (let key in baseData) {
   const oldChapter: number[] = chapterStored[id]?.chapter ?? [];
   const newChapter = chapterScrape.filter((x) => !oldChapter.includes(x));
 
+  dataStored[id] = dataScrape;
   chapterStored[id] = {
     chapter: [...oldChapter, ...newChapter],
     newChapter: newChapter,
     lastUpdate: new Date().toISOString(),
   };
-  dataStored[id] = dataScrape;
-  console.log(dataStored[id]);
-  console.log(chapterStored[id]);
+  writeFileSync(chapterPath, JSON.stringify(chapterStored, null, 2), "utf-8");
+  writeFileSync(dataPath, JSON.stringify(dataStored, null, 2), "utf-8");
+  console.log("Done");
 })();
