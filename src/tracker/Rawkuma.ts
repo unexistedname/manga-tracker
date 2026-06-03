@@ -6,7 +6,12 @@ import type { metadata } from "./lib/Metadata.js";
 // ---------------------------------------
 export async function chapter(url: string): Promise<string[]> {
   try {
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137.0.0.0 Safari/537.36",
+      },
+    });
     const $ = cheerio.load(res.data);
     const list_url = $("#chapter-list").attr("hx-get");
     if (typeof list_url !== "string") {
@@ -15,7 +20,12 @@ export async function chapter(url: string): Promise<string[]> {
     }
     console.log("[ RAWKUMA.CHAPTER ] Chapter list API get.");
 
-    const chapter_url_res = await axios.get(list_url);
+    const chapter_url_res = await axios.get(list_url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137.0.0.0 Safari/537.36",
+      },
+    });
 
     console.log(
       "[ RAWKUMA.CHAPTER ] Successfully executed GET request into chapter API.",
@@ -35,7 +45,12 @@ export async function chapter(url: string): Promise<string[]> {
 export async function metadata(url: string): Promise<metadata> {
   // Scrapes from rawkuma, doesn't get author & artist name
   try {
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137.0.0.0 Safari/537.36",
+      },
+    });
     const $ = cheerio.load(res.data);
 
     const title = $("h1[itemprop='name']").text().trim();
