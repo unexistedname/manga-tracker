@@ -9,7 +9,7 @@ import { DOMAIN } from "./tracker/lib/Domain.js";
 import type { metadata } from "./tracker/lib/Metadata.js";
 
 // Libraries for scraping
-import * as Rawkuma from "./tracker/Rawkuma.js";
+import Rawkuma from "./tracker/Rawkuma.js";
 import * as Mangadex from "./tracker/Mangadex.js";
 import * as Mangasushi from "./tracker/Mangasushi.js";
 import Rawdevart from "./tracker/Rawdevart.js";
@@ -55,8 +55,10 @@ const chapterStored = existsSync(chapterPath)
         switch (domain) { // Start scraping here 
           case DOMAIN.Rawkuma: {
             console.log("[ MAIN ] Getting from rawkuma");
-            dataScrape = await Rawkuma.metadata(baseData[key]); 
-            chapterScrape = await Rawkuma.chapter(baseData[key]);
+            const res = await Rawkuma(baseData[key]);
+
+            dataScrape = res.metadata;
+            chapterScrape = res.chapter;
             break;
           }
 
