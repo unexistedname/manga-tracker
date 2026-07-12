@@ -42,7 +42,7 @@ export async function chapter(url: string): Promise<string[]> {
   }
 }
 
-export async function metadata(url: string): Promise<metadata> {
+export default async function Rawkuma(url: string) {
   // Scrapes from rawkuma, doesn't get author & artist name
   try {
     const res = await axios.get(url, {
@@ -63,13 +63,23 @@ export async function metadata(url: string): Promise<metadata> {
     const cover = $("div[itemprop='image'] img").attr("src");
     console.log("[ RAWKUMA.METADATA ] Metadata obtained.");
 
-    return {
+    const list = $("div#chapter-list div")
+      .map((_, ch) => $(ch).attr("data-chapter-number"))
+      .get()
+      .reverse();
+    console.log("[ RAWKUMA.CHAPTER ] Chapter list obtained.");
+
+    const metadata: metadata = {
       title: title,
       descriptions: descriptions,
       coverURL: cover ? cover : null,
       genre: genre,
       src: "rawkuma",
     };
+    return {
+      chapter: list,
+      metadata: metadata
+    }
   } catch (error: unknown) {
     throw error;
   }
