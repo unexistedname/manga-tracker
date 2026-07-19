@@ -1,14 +1,14 @@
 {
-  "name": "manga-tracker",
+  "name": "silently-tracked",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/main.ts",
   "type": "module",
   "scripts": {
-    "start": "npx tsx main.ts",
-    "start_auto": "npx tsx automated_main.ts"
+    "dev": "npx tsx main.ts",
+    "build": "npx tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "existedname",
   "license": "ISC",
   "description": "",
   "dependencies": {
