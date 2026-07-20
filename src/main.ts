@@ -42,6 +42,7 @@ const chapterStored = existsSync(chapterPath)
 // ----main stuff----
 (async () => {
   console.log(`[ MAIN | ${now.toLocaleTimeString()} ] Scraping started...`);
+  let newUpdate: number = 0;
   for (let key in baseData) {
     if (baseData.hasOwnProperty(key)) {
       try {
@@ -99,6 +100,9 @@ const chapterStored = existsSync(chapterPath)
         );
         if (newChapter.length === 0) {
           newChapter = chapterStored[id]?.newChapter; // Keeps the old newChapter value if there's no update
+        } else {
+          console.log(`[ MAIN ] New update on ${key}!`);
+          newUpdate += 1;
         }
 
         console.log(
